@@ -23,9 +23,8 @@ class Classifier:
         self,
         n_estimators: Optional[int] = 50,
         eta: float = 0.3,
-        refit_method: str = "glm",
         tree_method: str = "auto",
-        max_bin: int = 256,
+        max_bin: int = 20,
         reg_lambda: float = 0,
         reg_alpha: float = 0,
         gamma: float = 0,
@@ -37,7 +36,6 @@ class Classifier:
         Args:
             n_estimators (int): Number of gradient boosted trees.
             eta (float): Boosting learning rate.
-            refit_method (str): {“glm”, “xgb”} The method for refit the overall model using the optimized bins.
             tree_method (str): {“exact”, “hist”, “approx”, “gpu_hist”, “auto”} Specify which tree method to use.
             max_bin (int): If using histogram-based algorithm, maximum number of bins per feature.
             reg_alpha (float): L1 regularization term on weights.
@@ -63,6 +61,7 @@ class Classifier:
         model = XGB1Classifier(
             n_estimators=self.n_estimators,
             eta=self.eta,
+            refit_method="xgb",
             tree_method=self.tree_method,
             max_bin=self.max_bin,
             reg_lambda=self.reg_lambda,
